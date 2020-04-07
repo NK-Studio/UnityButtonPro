@@ -59,7 +59,7 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     public void OnPointerDown(PointerEventData eventData)
     {
         //왼쪽 마우스를 누른 경우에만 해당
-        if (!Input.GetMouseButton(0)) return;
+        if (eventData.button != PointerEventData.InputButton.Left) return;
 
         //활성화
         onSelectButton();
@@ -78,7 +78,7 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     public void OnPointerUp(PointerEventData eventData)
     {
         //왼쪽 마우스를 누른 경우에만 해당
-        if (!Input.GetMouseButtonDown(0)) return;
+        if (eventData.button != PointerEventData.InputButton.Left) return;
 
         //그룹이 할당이 되어 있지 않을 때, 버튼을 땟을 시 : Not Select
         if (_buttonGroup == null)
