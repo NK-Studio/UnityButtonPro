@@ -1,0 +1,11 @@
+{
+  "name": "com.unity.nkstudio.buttonpro",
+  "displayName": "ButtonPro",
+  "version": "1.0.0",
+  "unity": "2018.2",
+  "description": "It is a button component developed to expand with a different feeling about the button component among the corresponding Unity components.",
+  "dependencies": {
+    "com.unity.ugui": "1.0.0"
+  },
+  "type": "library"
+}
