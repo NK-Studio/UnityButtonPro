@@ -1,0 +1,14 @@
+{
+    "name": "C8c644574C6f4Bde933C4Aab3ac68aec.Buttonpro.Editor.Tests",
+    "references": [
+        "C8c644574C6f4Bde933C4Aab3ac68aec.Buttonpro.Editor",
+        "C8c644574C6f4Bde933C4Aab3ac68aec.Buttonpro"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

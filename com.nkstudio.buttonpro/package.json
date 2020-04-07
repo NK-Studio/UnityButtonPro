@@ -1,0 +1,11 @@
+{
+  "name": "com.nkstudio.buttonpro",
+  "displayName": "ButtonPro",
+  "version": "1.0.0",
+  "unity": "2018.2",
+  "description": "\ud574\ub2f9 \uae30\ub2a5 \uc720\ub2c8\ud2f0 \ucef4\ud3ec\ub10c\ud2b8 \uc911 \ubc84\ud2bc \ucef4\ud3ec\ub10c\ud2b8\uc5d0 \ub300\ud558\uc5ec\n\ub2e4\ub978 \ub290\ub08c\uc73c\ub85c \ud655\uc7a5\ud560 \uc218 \uc788\ub3c4\ub85d \uac1c\ubc1c\ub41c \ubc84\ud2bc \ucef4\ud3ec\ub10c\ud2b8 \uc785\ub2c8\ub2e4.",
+  "dependencies": {
+    "com.unity.ugui": "1.0.0"
+  },
+  "type": "library"
+}
