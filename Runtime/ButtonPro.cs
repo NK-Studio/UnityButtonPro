@@ -43,11 +43,11 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     private BtnState _btnState;
 
     //그룹화가 형태인 버튼인지 아닌지 처리
-    [HideInInspector]
+//    [HideInInspector]
     public ButtonGroup _buttonGroup;
 
     //그룹화로 만들시, 선택권이 있는 버튼
-    [HideInInspector]
+//    [HideInInspector]
     public bool isSelected;
 
     #endregion
@@ -64,12 +64,12 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         //활성화
         onSelectButton();
 
-        //할당이 되어 있다면, 몇번째 버튼이 선택됬는지 버튼 그룹에게 알려준다.
-        if (_buttonGroup == null) return;
-
-        //현재 선택된 버튼이 자신임을 변경한다.
-        _buttonGroup.SelectedNumber = ButtonGroup.ButtonSearch(_buttonGroup.buttonPros, this);
-
+         //할당이 되어 있다면, 몇번째 버튼이 선택됬는지 버튼 그룹에게 알려준다.
+         if (_buttonGroup == null) return;
+        
+         //현재 선택된 버튼이 자신임을 변경한다.
+         _buttonGroup.SelectedNumber = ButtonGroup.ButtonSearch(_buttonGroup.buttonPros, this);
+        
         //데이터 변경 처리
         _buttonGroup.notifyDataSetChanged();
     }
