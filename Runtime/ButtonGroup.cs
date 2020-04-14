@@ -157,10 +157,13 @@ public class ButtonGroup : MonoBehaviour
     /// <summary>
     /// SelectedNumber을 Set하고, 버튼의 렌더링 상태를 변경해야할 때, 호출합니다.
     /// </summary>
-    public void notifyDataSetChanged()
+   public void notifyDataSetChanged()
     {
-        buttonPros[_preNumber].onNotSelectButton();
-        buttonPros[SelectedNumber].onSelectButton();
+        if (_preNumber > -1)
+            buttonPros[_preNumber].onNotSelectButton();
+        
+        if (_SelectedNumber > -1)
+            buttonPros[SelectedNumber].onSelectButton();
     }
 
     /// <summary>
