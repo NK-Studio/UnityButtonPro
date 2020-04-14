@@ -43,11 +43,11 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     private BtnState _btnState;
 
     //그룹화가 형태인 버튼인지 아닌지 처리
-//    [HideInInspector]
+    [HideInInspector]
     public ButtonGroup _buttonGroup;
 
     //그룹화로 만들시, 선택권이 있는 버튼
-//    [HideInInspector]
+    [HideInInspector]
     public bool isSelected;
 
     #endregion
