@@ -49,7 +49,7 @@ public class ButtonGroup : MonoBehaviour
         }
 
         //선택 넘버가 따로 설정되어있지 않다면,
-        if (SelectedNumber == -1)
+        if (SelectedNumber < 0)
             return;
 
         //선택 넘버가 값이 오버되는 것을 방지
@@ -62,7 +62,7 @@ public class ButtonGroup : MonoBehaviour
     private void Start()
     {
         //선택 넘버가 따로 설정되어있지 않다면 : return
-        if (SelectedNumber == -1)
+        if (SelectedNumber < 0)
             return;
 
         buttonPros[SelectedNumber].onSelectButton();
