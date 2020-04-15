@@ -1,7 +1,7 @@
 {
   "name": "com.unity.nkstudio.buttonpro",
   "displayName": "ButtonPro",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "unity": "2018.2",
   "description": "It is a button component developed to expand with a different feeling about the button component among the corresponding Unity components.",
   "dependencies": {
