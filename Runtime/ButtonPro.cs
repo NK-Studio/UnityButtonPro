@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler,
-    IPointerUpHandler
+    IPointerClickHandler
 {
     #region Enum
 
@@ -75,7 +75,7 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     }
 
     //버튼을 땜
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnPointerClick(PointerEventData eventData)
     {
         //왼쪽 마우스를 누른 경우에만 해당
         if (eventData.button != PointerEventData.InputButton.Left) return;
