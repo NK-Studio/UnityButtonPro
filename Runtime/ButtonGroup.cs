@@ -81,7 +81,8 @@ public class ButtonGroup : MonoBehaviour
         if (DisableToReset)
         {
             //현재 선택된 버튼을 비활성화 합니다.
-            buttonPros[_SelectedNumber].onNotSelectButton();
+            if (_SelectedNumber > -1)
+                 buttonPros[_SelectedNumber].onNotSelectButton();
             
             //초기 선택된 버튼을 활성화 합니다.
             if (initSN > -1)
