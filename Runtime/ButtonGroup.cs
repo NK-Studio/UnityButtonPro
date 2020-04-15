@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonGroup : MonoBehaviour
@@ -13,10 +13,17 @@ public class ButtonGroup : MonoBehaviour
     [SerializeField, Tooltip("초기 선택될 버튼")]
     private int _SelectedNumber = -1;
 
+    [Header("Experimental")]
+    [SerializeField, Tooltip("Disable될 시, SelectedNumber를 다시 리셋합니다.")]
+    private bool DisableToReset;
+    
     #endregion
 
     #region Hide Inspector
 
+    //초기 SelectNumber입니다.
+    private int initSN;
+    
     public int SelectedNumber
     {
         get => _SelectedNumber;
@@ -36,7 +43,8 @@ public class ButtonGroup : MonoBehaviour
     {
         //초기화
         _preNumber = SelectedNumber;
-
+        initSN = SelectedNumber;
+        
         //등록된 버튼이 1미만이면 : return
         if (buttonPros.Count < 1)
             return;
@@ -49,7 +57,7 @@ public class ButtonGroup : MonoBehaviour
         }
 
         //선택 넘버가 따로 설정되어있지 않다면,
-        if (SelectedNumber < 0)
+        if (SelectedNumber == -1)
             return;
 
         //선택 넘버가 값이 오버되는 것을 방지
@@ -62,10 +70,25 @@ public class ButtonGroup : MonoBehaviour
     private void Start()
     {
         //선택 넘버가 따로 설정되어있지 않다면 : return
-        if (SelectedNumber < 0)
+        if (SelectedNumber == -1)
             return;
 
         buttonPros[SelectedNumber].onSelectButton();
+    }
+
+    private void OnDisable()
+    {
+        if (DisableToReset)
+        {
+            //현재 선택된 버튼을 비활성화 합니다.
+            buttonPros[_SelectedNumber].onNotSelectButton();
+            
+            //초기 선택된 버튼을 활성화 합니다.
+            buttonPros[initSN].onSelectButton();
+            
+            //초기화
+            SelectedNumber = initSN;
+        }
     }
 
     /// <summary>
