@@ -84,7 +84,8 @@ public class ButtonGroup : MonoBehaviour
             buttonPros[_SelectedNumber].onNotSelectButton();
             
             //초기 선택된 버튼을 활성화 합니다.
-            buttonPros[initSN].onSelectButton();
+            if (initSN > -1)
+                buttonPros[initSN].onSelectButton();
             
             //초기화
             SelectedNumber = initSN;
