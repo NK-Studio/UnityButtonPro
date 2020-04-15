@@ -124,7 +124,7 @@ public class ButtonGroup : MonoBehaviour
         if (!buttonPros.Contains(button))
         {
             buttonPros.Add(button);
-            notifyAddButton();
+            notifyAddButton(button);
         }else
             Debug.LogWarning("이미 수록된 버튼입니다.");
     }
