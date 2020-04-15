@@ -194,25 +194,14 @@ public class ButtonGroup : MonoBehaviour
     /// <summary>
     /// 버튼을 동적으로 추가할 경우 정보를 다시 갱신합니다.
     /// </summary>
-    public void notifyAddButton()
+    public void notifyAddButton(ButtonPro btn)
     {
         //등록된 버튼이 1미만이면 : return
         if (buttonPros.Count < 1)
             return;
 
         //전체 오브젝트가 선택되지 않도록하고, 그룹화 한다.
-        foreach (var btnPro in buttonPros)
-        {
-            btnPro.isSelected = false;
-            btnPro._buttonGroup = this;
-        }
-
-        //선택 넘버가 값이 오버되는 것을 방지
-        SelectedNumber = Mathf.Clamp(SelectedNumber, 0, buttonPros.Count);
-
-        //해당 버튼이 선택되도록 변경.
-        buttonPros[SelectedNumber].isSelected = true;
-
-        buttonPros[SelectedNumber].onSelectButton();
+        btn.isSelected = false;
+        btn._buttonGroup = this;
     }
 }
