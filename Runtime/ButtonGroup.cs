@@ -14,7 +14,7 @@ public class ButtonGroup : MonoBehaviour
     private int _SelectedNumber = -1;
 
     [Header("Experimental")]
-    [SerializeField, Tooltip("Disable될 시, SelectedNumber를 다시 리셋합니다.")]
+    [SerializeField, Tooltip("Disable될 시, SelectedNumber를 초기 값으로 리셋합니다.")]
     private bool DisableToReset;
     
     #endregion
