@@ -5,8 +5,18 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler,
-    IPointerClickHandler
+    IPointerClickHandler,IPointerUpHandler
 {
+    [Serializable]
+    private class FuncEvent
+    {
+        public UnityEvent onDown;
+
+        public UnityEvent onPress;
+        
+        public UnityEvent onUp;
+    }
+
     #region Enum
 
     private enum BtnState
@@ -29,8 +39,8 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     [SerializeField, Tooltip("눌렸을 때")]
     private Sprite pressImage;
 
-    [SerializeField, Tooltip("누르고 땟을 때, 함수를 실행합니다.")]
-    private UnityEvent onDownUp;
+    [SerializeField]
+    private FuncEvent onButtonEvent;
 
     #endregion
 
@@ -50,6 +60,8 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     [HideInInspector]
     public bool isSelected;
 
+    //버튼을 누르고 있는 중인지, 아닌지 체크
+    private bool ButtonDown;
     #endregion
 
     private void Awake() => //초기화 해줍니다.
@@ -61,8 +73,13 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         //왼쪽 마우스를 누른 경우에만 해당
         if (eventData.button != PointerEventData.InputButton.Left) return;
 
+       //버튼을 누르는 최초, 동작합니다.
+        onButtonEvent.onDown?.Invoke();
+        
         //활성화
         onSelectButton();
+
+        ButtonDown = true;
 
          //할당이 되어 있다면, 몇번째 버튼이 선택됬는지 버튼 그룹에게 알려준다.
          if (_buttonGroup == null) return;
@@ -72,6 +89,15 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         
         //데이터 변경 처리
         _buttonGroup.notifyDataSetChanged();
+    }
+    
+        public void OnPointerUp(PointerEventData eventData) =>
+        ButtonDown = false;
+        
+            private void Update()
+    {
+        if(ButtonDown)
+            onButtonEvent.onPress?.Invoke();
     }
 
     //버튼을 땜
@@ -84,8 +110,8 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         if (_buttonGroup == null)
             onNotSelectButton();
 
-        //연결된 이벤트가 동작되도록 합니다.
-        onDownUp?.Invoke();
+        //버튼을 땟을 시, 동작합니다.
+        onButtonEvent.onUp?.Invoke();
     }
 
     //버튼 영역에 닿음
@@ -132,4 +158,47 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         if (_buttonGroup != null)
             isSelected = false;
     }
+    
+        #region Other
+
+    [MenuItem("GameObject/UI/Button - Button Pro")]
+    private static void CreateButtonPro(MenuCommand menuCommand)
+    {
+        GameObject go = new GameObject("ButtonPro");
+        GameObjectUtility.SetParentAndAlign(go, menuCommand.context as GameObject);
+        Undo.AddComponent<ButtonPro>(go);
+        Undo.RegisterCreatedObjectUndo(go, "Create " + go.name);
+        Selection.activeObject = go;
+
+        var canvas = GameObject.Find("Canvas");
+
+        go.transform.SetParent(canvas == null ? createCanvas().transform : canvas.transform);
+        go.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
+        go.layer = 5;
+    }
+
+    private static GameObject createCanvas()
+    {
+        GameObject g = new GameObject("Canvas");
+        Canvas canvas = g.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        CanvasScaler cs = g.AddComponent<CanvasScaler>();
+        cs.scaleFactor = 1f;
+        cs.dynamicPixelsPerUnit = 100f;
+        Undo.AddComponent<GraphicRaycaster>(g);
+        g.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 3.0f);
+        g.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 3.0f);
+        g.layer = 5;
+        
+        if (!GameObject.Find("EventSystem"))
+        {
+            GameObject eventSystem = new GameObject("EventSystem");
+            Undo.AddComponent<EventSystem>(eventSystem);
+            Undo.AddComponent<StandaloneInputModule>(eventSystem);
+        }
+        
+        return g;
+    }
+
+    #endregion
 }
