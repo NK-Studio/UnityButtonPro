@@ -41,6 +41,9 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     [SerializeField, Tooltip("눌렸을 때")]
     private Sprite pressImage;
 
+    [SerializeField, Tooltip("선택되었을 때")]
+    private Sprite selectImage;
+
     [SerializeField]
     private FuncEvent onButtonEvent;
 
@@ -108,12 +111,14 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         //왼쪽 마우스를 누른 경우에만 해당
         if (eventData.button != PointerEventData.InputButton.Left) return;
 
+        //버튼을 땟을 시, 동작합니다.
+        onButtonEvent.onUp?.Invoke();
+
         //그룹이 할당이 되어 있지 않을 때, 버튼을 땟을 시 : Not Select
         if (_buttonGroup == null)
             onNotSelectButton();
-
-        //버튼을 땟을 시, 동작합니다.
-        onButtonEvent.onUp?.Invoke();
+        else
+            image.sprite = selectImage;
     }
 
     //버튼 영역에 닿음
