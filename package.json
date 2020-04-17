@@ -5,7 +5,8 @@
   "unity": "2018.2",
   "description": "It is a button component developed to expand with a different feeling about the button component among the corresponding Unity components.",
   "dependencies": {
-    "com.unity.ugui": "1.0.0"
+    "com.unity.ugui": "1.0.0",
+    "com.unity.textmeshpro": "2.0.1"
   },
   "type": "library"
 }
