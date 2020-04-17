@@ -4,6 +4,8 @@
   "version": "1.1.0",
   "unity": "2018.2",
   "description": "It is a button component developed to expand with a different feeling about the button component among the corresponding Unity components.",
+  "references": [ "Unity.TextMeshPro" ],
+  "optionalUnityReferences": [ "TestAssemblies" ],
   "dependencies": {
     "com.unity.ugui": "1.0.0",
     "com.unity.textmeshpro": "2.0.1"
