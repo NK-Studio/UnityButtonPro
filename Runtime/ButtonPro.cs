@@ -1,5 +1,4 @@
 using System;
-using TMPro;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.Events;
@@ -273,7 +272,7 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
 
         var _text = new GameObject("Text (TMP)");
         _text.transform.SetParent(go.transform);
-        Undo.AddComponent<TextMeshProUGUI>(_text);
+        Undo.AddComponent<TMPro.TextMeshProUGUI>(_text);
 
         var _rect = _text.GetComponent<RectTransform>();
         _rect.anchoredPosition3D = Vector3.zero;
