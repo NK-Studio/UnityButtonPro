@@ -16,14 +16,14 @@ public class ButtonGroup : MonoBehaviour
     [Header("Experimental")]
     [SerializeField, Tooltip("Disable될 시, SelectedNumber를 초기 값으로 리셋합니다.")]
     private bool DisableToReset;
-    
+
     #endregion
 
     #region Hide Inspector
 
     //초기 SelectNumber입니다.
     private int initSN;
-    
+
     public int SelectedNumber
     {
         get => _SelectedNumber;
@@ -33,7 +33,7 @@ public class ButtonGroup : MonoBehaviour
             _SelectedNumber = value;
         }
     }
-
+    
     //이전에 선택된 버튼입니다.
     private int _preNumber;
 
@@ -44,7 +44,7 @@ public class ButtonGroup : MonoBehaviour
         //초기화
         _preNumber = SelectedNumber;
         initSN = SelectedNumber;
-        
+
         //등록된 버튼이 1미만이면 : return
         if (buttonPros.Count < 1)
             return;
@@ -73,7 +73,7 @@ public class ButtonGroup : MonoBehaviour
         if (SelectedNumber == -1)
             return;
 
-        buttonPros[SelectedNumber].onSelectButton();
+        buttonPros[SelectedNumber].onPressButton();
     }
 
     private void OnDisable()
@@ -82,12 +82,12 @@ public class ButtonGroup : MonoBehaviour
         {
             //현재 선택된 버튼을 비활성화 합니다.
             if (_SelectedNumber > -1)
-                 buttonPros[_SelectedNumber].onNotSelectButton();
-            
+                buttonPros[_SelectedNumber].onNotSelectButton();
+
             //초기 선택된 버튼을 활성화 합니다.
             if (initSN > -1)
-                buttonPros[initSN].onSelectButton();
-            
+                buttonPros[initSN].onSelectedButton();
+
             //초기화
             SelectedNumber = initSN;
         }
@@ -114,7 +114,7 @@ public class ButtonGroup : MonoBehaviour
 
         return index;
     }
-    
+
     /// <summary>
     /// 인자로 넘어온 버튼을 버튼 그룹에 추가합니다.
     /// </summary>
@@ -125,10 +125,11 @@ public class ButtonGroup : MonoBehaviour
         {
             buttonPros.Add(button);
             notifyAddButton(button);
-        }else
+        }
+        else
             Debug.LogWarning("이미 수록된 버튼입니다.");
     }
-    
+
     /// <summary>
     /// 인자로 넘어온 버튼을 그룹에서 제거합니다.
     /// </summary>
@@ -146,7 +147,7 @@ public class ButtonGroup : MonoBehaviour
             _preNumber = _SelectedNumber;
 
             //화면 버튼 렌더링 갱신
-            buttonPros[SelectedNumber].onSelectButton();
+            buttonPros[SelectedNumber].onPressButton();
             button.onNotSelectButton();
         }
     }
@@ -175,20 +176,20 @@ public class ButtonGroup : MonoBehaviour
         _preNumber = _SelectedNumber;
 
         //화면 버튼 렌더링 갱신
-        buttonPros[SelectedNumber].onSelectButton();
+        buttonPros[SelectedNumber].onPressButton();
         preButton.onNotSelectButton();
     }
-    
+
     /// <summary>
     /// SelectedNumber을 Set하고, 버튼의 렌더링 상태를 변경해야할 때, 호출합니다.
     /// </summary>
-   public void notifyDataSetChanged()
+    public void notifyDataSetChanged()
     {
         if (_preNumber > -1)
             buttonPros[_preNumber].onNotSelectButton();
-        
+
         if (_SelectedNumber > -1)
-            buttonPros[SelectedNumber].onSelectButton();
+            buttonPros[SelectedNumber].onPressButton();
     }
 
     /// <summary>
