@@ -42,10 +42,11 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     [SerializeField, Tooltip("눌렸을 때")]
     private Sprite pressImage;
 
+    [Header("Option")]
     [SerializeField, Tooltip("선택되었을 때")]
     private Sprite selectImage;
 
-    [SerializeField]
+    [Space, SerializeField]
     private FuncEvent onButtonEvent;
 
     #endregion
