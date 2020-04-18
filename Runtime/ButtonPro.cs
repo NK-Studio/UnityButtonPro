@@ -273,7 +273,7 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         var _text = new GameObject("Text (TMP)");
         _text.transform.SetParent(go.transform);
         Undo.AddComponent<TMPro.TextMeshProUGUI>(_text);
-
+        
         var _rect = _text.GetComponent<RectTransform>();
         _rect.anchoredPosition3D = Vector3.zero;
         _rect.anchorMin = new Vector2(0, 0);
