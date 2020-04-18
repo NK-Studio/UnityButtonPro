@@ -32,17 +32,17 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
 
     #region Show Inspector
 
-    [Header("이미지")]
+    [Header("Default Image")]
     [SerializeField, Tooltip("기본 상태일 때")]
     private Sprite normalImage;
 
+    [Header("Option")]
     [SerializeField, Tooltip("마우스가 닿았을 때")]
     private Sprite reachImage;
 
     [SerializeField, Tooltip("눌렸을 때")]
     private Sprite pressImage;
-
-    [Header("Option")]
+    
     [SerializeField, Tooltip("선택되었을 때")]
     private Sprite selectImage;
 
