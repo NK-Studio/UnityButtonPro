@@ -1,6 +1,8 @@
 {
     "name": "C8c644574C6f4Bde933C4Aab3ac68aec.Buttonpro",
-    "references": [],
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+],
     "includePlatforms": [],
     "excludePlatforms": []
 }
