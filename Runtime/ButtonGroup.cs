@@ -88,6 +88,9 @@ public class ButtonGroup : MonoBehaviour
             if (initSN > -1)
                 buttonPros[initSN].onSelectedButton();
 
+          foreach (var btn in buttonPros)
+                btn.Reset();
+
             //초기화
             SelectedNumber = initSN;
         }
