@@ -17,6 +17,8 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         public UnityEvent onPress;
 
         public UnityEvent onUp;
+        
+        public UnityEvent onClick;
     }
 
     #region Enum
@@ -104,8 +106,11 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         onButtonEvent.onDown?.Invoke();
     }
 
-    public void OnPointerUp(PointerEventData eventData) =>
+    public void OnPointerUp(PointerEventData eventData)
+    {
         isButtonDown = false;
+        onButtonEvent.onUp?.Invoke();
+    }
 
     private void Update()
     {
@@ -168,7 +173,7 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         }
         
         //버튼을 땟을 시, 동작합니다.
-        onButtonEvent.onUp?.Invoke();
+        onButtonEvent.onClick?.Invoke();
     }
 
     //버튼 영역에 닿음
@@ -214,6 +219,12 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         //버튼 그룹이 할당됬을 시 : Not Select
         if (_buttonGroup != null)
             isSelected = false;
+    }
+    
+    public void Reset()
+    {
+        isButtonDown = false;
+        isButtonReach = false;
     }
 
     #region Other
