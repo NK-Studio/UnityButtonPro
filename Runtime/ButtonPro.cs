@@ -10,7 +10,7 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     IPointerClickHandler, IPointerUpHandler
 {
     [Serializable]
-    private class FuncEvent
+    public class FuncEvent
     {
         public UnityEvent onDown;
 
