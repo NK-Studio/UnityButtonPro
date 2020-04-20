@@ -48,8 +48,8 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     [SerializeField, Tooltip("선택되었을 때")]
     private Sprite selectImage;
 
-    [Space, SerializeField]
-    private FuncEvent onButtonEvent;
+    [Space]
+    public FuncEvent onButtonEvent;
 
     #endregion
 
