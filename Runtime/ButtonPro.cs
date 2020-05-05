@@ -11,6 +11,10 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     [Serializable]
     public class FuncEvent
     {
+        public UnityEvent onEnter;
+
+        public UnityEvent onExit;
+    
         public UnityEvent onDown;
 
         public UnityEvent onPress;
@@ -176,12 +180,18 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     }
 
     //버튼 영역에 닿음
-    public void OnPointerEnter(PointerEventData eventData) =>
+    public void OnPointerEnter(PointerEventData eventData)
+    {
         isButtonReach = true;
+        onButtonEvent.onEnter?.Invoke();
+    }
 
     //버튼 영역에서 나감
-    public void OnPointerExit(PointerEventData eventData) =>
+    public void OnPointerExit(PointerEventData eventData)
+    {
         isButtonReach = false;
+        onButtonEvent.onExit?.Invoke();
+    }
 
     /// <summary>
     /// 누르고 있는 상태로 전환합니다.
