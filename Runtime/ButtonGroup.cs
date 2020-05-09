@@ -33,7 +33,7 @@ public class ButtonGroup : MonoBehaviour
             _SelectedNumber = value;
         }
     }
-    
+
     //이전에 선택된 버튼입니다.
     private int _preNumber;
 
@@ -88,7 +88,7 @@ public class ButtonGroup : MonoBehaviour
             if (initSN > -1)
                 buttonPros[initSN].onSelectedButton();
 
-          foreach (var btn in buttonPros)
+            foreach (var btn in buttonPros)
                 btn.Reset();
 
             //초기화

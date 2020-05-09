@@ -14,13 +14,13 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         public UnityEvent onEnter;
 
         public UnityEvent onExit;
-    
+
         public UnityEvent onDown;
 
         public UnityEvent onPress;
 
         public UnityEvent onUp;
-        
+
         public UnityEvent onClick;
     }
 
@@ -47,7 +47,7 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
 
     [SerializeField, Tooltip("눌렸을 때")]
     private Sprite pressImage;
-    
+
     [SerializeField, Tooltip("선택되었을 때")]
     private Sprite selectImage;
 
@@ -80,6 +80,7 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
 
     #endregion
 
+    #region Monobehaviour Function
     private void Awake()
     {
         image = GetComponent<Image>();
@@ -92,27 +93,6 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     {
         if (normalImage != null)
             image.sprite = normalImage;
-    }
-
-    //버튼을 누름
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        //왼쪽 마우스를 누른 경우에만 해당
-        if (eventData.button != PointerEventData.InputButton.Left) return;
-        
-        //누르고 있는 중 처리
-        onPressButton();
-
-        isButtonDown = true;
-        
-        //버튼을 누르는 최초, 동작합니다.
-        onButtonEvent.onDown?.Invoke();
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        isButtonDown = false;
-        onButtonEvent.onUp?.Invoke();
     }
 
     private void Update()
@@ -143,9 +123,32 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
                 }
             }
         }
-        
+
         if (isButtonDown)
             onButtonEvent.onPress?.Invoke();
+    } 
+    #endregion
+
+    //버튼을 누름
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        //왼쪽 마우스를 누른 경우에만 해당
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+
+        //누르고 있는 중 처리
+        onPressButton();
+
+        isButtonDown = true;
+
+        //버튼을 누르는 최초, 동작합니다.
+        onButtonEvent.onDown?.Invoke();
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        isButtonDown = false;
+
+        onButtonEvent.onUp?.Invoke();
     }
 
     //버튼을 땜
@@ -153,7 +156,7 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     {
         //왼쪽 마우스를 누른 경우에만 해당
         if (eventData.button != PointerEventData.InputButton.Left) return;
-        
+
         //할당이 되어 있다면, 몇번째 버튼이 선택됬는지 버튼 그룹에게 알려준다.
         if (_buttonGroup != null)
         {
@@ -174,7 +177,9 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
             if (selectImage != null)
                 image.sprite = selectImage;
         }
-        
+
+        onButtonEvent.onExit?.Invoke();
+
         //버튼을 땟을 시, 동작합니다.
         onButtonEvent.onClick?.Invoke();
     }
@@ -190,7 +195,9 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     public void OnPointerExit(PointerEventData eventData)
     {
         isButtonReach = false;
-        onButtonEvent.onExit?.Invoke();
+
+        if (_btnState != BtnState.PRESS)
+            onButtonEvent.onExit?.Invoke();
     }
 
     /// <summary>
@@ -229,7 +236,7 @@ public class ButtonPro : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         if (_buttonGroup != null)
             isSelected = false;
     }
-    
+
     public void Reset()
     {
         isButtonDown = false;
